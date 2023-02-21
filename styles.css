@@ -1,5 +1,9 @@
+@import url(https://fonts.googleapis.com/css?family=Electrolize);
+@import url(https://fonts.googleapis.com/css?family=Edu+TAS+Beginner);
+
 body{
     background-color: rgb(224, 233, 243);
+    font-family: sans-serif;
 }
 
 .button{
@@ -7,6 +11,9 @@ body{
     border-color: black;
     border-radius: 10px;
     border-width: 2px;
+    font-family: "Edu TAS Beginner";
+    font-size: 20px;
+    font-weight: bolder;
     height: 80px;
     width: 
 }
@@ -21,6 +28,7 @@ body{
     flex-direction: column;
     gap: 15px;
     grid-template-columns: repeat(4, 1fr);
+    margin-top: 5%;
     padding: 20px;
     width: 400px;
 }
@@ -37,6 +45,7 @@ body{
     border-radius: 5px;
     border-style: solid;
     border-width: 2px;
+    font-family: "Electrolize";
     grid-column: span 4;
     height: max-content;
     margin-bottom: 10px;
@@ -47,14 +56,17 @@ body{
 }
 
 .footer{
-text-align: center;
+    display: flex;
+    justify-content: center;
+    width: 100%;
 }
 
 .main{
     display: flex;
     align-items: center;
-    height: 70vh;
+    height: 80vh;
     justify-content: center;
+    min-height: 700px;
 }
 
 .screen{
