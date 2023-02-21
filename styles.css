@@ -15,7 +15,11 @@ body{
     font-size: 20px;
     font-weight: bolder;
     height: 80px;
-    width: 
+    width:       
+}
+
+.button:hover{
+    box-shadow: 0 0 20px inset rgba(170, 3, 3, 0.7);
 }
 
 .calcBody{
