@@ -4,10 +4,10 @@ const screenMain = document.getElementById("screenMain");
 const numButtons = document.querySelectorAll(".numButton");
 const opButtons = document.querySelectorAll(".opButton");
 const decimal = document.getElementById("decimal");
+const posNeg = document.getElementById("posNeg");
 const allClear = document.getElementById("allClear");
 const backspace = document.getElementById("backspace");
 const equals = document.getElementById("equals");
-const posNeg = document.getElementById("posNeg");
 
 screenMain.innerText = "0";
 screenUpper.innerText = "0";
@@ -45,7 +45,7 @@ allClear.addEventListener("click", () => {
 })
 
 backspace.addEventListener("click", () => {
-    
+    backspaceFunc();
 })
 
 equals.addEventListener("click", () => {
@@ -73,6 +73,7 @@ function opButtonFunc(btn){
         workingString = "";
         noOp = true;
         console.log(rawMath);
+        console.log("WorkingString = " + workingString)
     }
 }
 
@@ -98,13 +99,35 @@ function posNegFunc(){
     }
 }
 
-function allClear(){
+function allClearFunc(){
     workingString = "";
     topString = "";
     rawMath = [];
     screenMain.innerText = "0";
     screenUpper.innerText = "0";
     answer = null;
+}
+
+function backspaceFunc(){
+    if(workingString !== ""){
+        workingString = "";
+        screenMain.innerText = "0";
+    }
+    else{
+        if(rawMath.length > 0){
+            workingString =  "";
+            screenMain.innerText = "0";
+            rawMath.length -= 2;
+            topString = rawMath.join("");
+            if(topString === ""){
+                screenUpper.innerText = "0"}
+            else{
+                screenUpper.innerText = topString;
+            }
+            console.log(topString)
+            console.log(rawMath);
+        };
+    }
 }
 
 
