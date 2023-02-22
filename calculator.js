@@ -16,7 +16,8 @@ let workingString = "";
 let topString = "";
 
 let rawMath = [];
-let opLast = true;
+let noOp = true;
+let noNum = false;
 
 numButtons.forEach(btn => {
     btn.addEventListener("click", () => {
@@ -31,7 +32,7 @@ opButtons.forEach(btn => {
 })
 
 decimal.addEventListener("click", () => {
-
+    decimalFunc();
 })
 
 allClear.addEventListener("click", () => {
@@ -53,17 +54,31 @@ posNeg.addEventListener("click", () => {
 ////////////////////////////////////////////////////////////////////////////////
 
 function numButtonFunc(btn){
-    workingString += `${btn.dataset.shows}`; 
-    screenMain.innerText = workingString;
-    opLast = false;
-    console.log(workingString);
+    if(noNum === false){
+        workingString += `${btn.dataset.shows}`; 
+        screenMain.innerText = workingString;
+        noOp = false;
+        console.log(workingString);
+    }
 }
 
 function opButtonFunc(btn){
-    if(opLast === false){
+    if(noOp === false){
         topString += `${workingString + btn.dataset.shows}`;
         screenTop.innerText = topString;
-        workingString = ""
+        rawMath.push(+workingString);
+        rawMath.push(btn.dataset.shows);
+        workingString = "";
+        noOp = true;
+        console.log(rawMath);
+    }
+}
+
+function decimalFunc(){
+    if((noNum === false) && (!workingString.includes("."))){
+        workingString === "" ? workingString = "0." :
+                                workingString += ".";
+        screenMain.innerText = workingString;
     }
 }
 
