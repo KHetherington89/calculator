@@ -9,37 +9,55 @@ const backspace = document.getElementById("backspace");
 const equals = document.getElementById("equals");
 const posNeg = document.getElementById("posNeg");
 
+let workingString = "0"
+screenMain.innerText = workingString;
+let topString = "0";
+screenTop.innerText = topString;
+
 numButtons.forEach(btn => {
-    btn.addEventListener("click", => {}
-    )
+    btn.addEventListener("click", () => {
+        numButtonFunc(btn);
+    })
 })
 
 opButtons.forEach(btn => {
-    btn.addEventListener("click", => {}
-    )
+    btn.addEventListener("click", () => {
+
+    })
 })
 
-decimal.addEventListener("click" => {
+decimal.addEventListener("click", () => {
 
 })
 
-allClear.addEventListener("click" => {
+allClear.addEventListener("click", () => {
     
 })
 
-backspace.addEventListener("click" => {
+backspace.addEventListener("click", () => {
     
 })
 
-equals.addEventListener("click" => {
+equals.addEventListener("click", () => {
     
 })
 
-posNeg.addEventListener("click" => {
+posNeg.addEventListener("click", () => {
     
 })
 
+////////////////////////////////////////////////////////////////////////////////
 
+function numButtonFunc(btn){
+    if(workingString === "0"){
+        workingString = `${btn.dataset.shows}`
+    }
+    else{
+        workingString += `${btn.dataset.shows}`
+    }
+    screenMain.innerText = workingString;
+    console.log(workingString);
+}
 
 
 

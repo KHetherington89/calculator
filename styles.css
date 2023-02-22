@@ -37,12 +37,6 @@ body{
     width: 400px;
 }
 
-/* .calcButtons{
-    display: grid;
-    gap: 15px;
-    grid-template-columns: repeat(4, 1fr);
-} */
-
 .calcScreen{
     background-color: rgb(168, 240, 216);
     border-color: black;
@@ -81,16 +75,11 @@ body{
 .screenMain{
     font-size: 45px;
     height: 60px;
-    overflow: hidden;
     padding: 3px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
 }
 
 .screenTop{
     font-size: 15px;
     max-height: 30px;
     padding: 3px;
-    overflow-y: scroll;
-    overflow-x: wrap;
 
