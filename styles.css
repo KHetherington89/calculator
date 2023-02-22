@@ -78,8 +78,9 @@ body{
     padding: 3px;
 }
 
-.screenTop{
+.screenUpper{
     font-size: 15px;
     max-height: 30px;
     padding: 3px;
+}
 

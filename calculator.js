@@ -1,5 +1,5 @@
 const footer = document.getElementById("footer");
-const screenTop = document.getElementById("screenTop");
+const screenUpper = document.getElementById("screenUpper");
 const screenMain = document.getElementById("screenMain");
 const numButtons = document.querySelectorAll(".numButton");
 const opButtons = document.querySelectorAll(".opButton");
@@ -10,7 +10,7 @@ const equals = document.getElementById("equals");
 const posNeg = document.getElementById("posNeg");
 
 screenMain.innerText = "0";
-screenTop.innerText = "0";
+screenUpper.innerText = "0";
 
 let workingString = "";
 let topString = "";
@@ -18,6 +18,7 @@ let topString = "";
 let rawMath = [];
 let noOp = true;
 let noNum = false;
+let answer = null;
 
 numButtons.forEach(btn => {
     btn.addEventListener("click", () => {
@@ -35,8 +36,12 @@ decimal.addEventListener("click", () => {
     decimalFunc();
 })
 
+posNeg.addEventListener("click", () => {
+    posNegFunc();    
+})
+
 allClear.addEventListener("click", () => {
-    
+    allClearFunc();
 })
 
 backspace.addEventListener("click", () => {
@@ -47,9 +52,6 @@ equals.addEventListener("click", () => {
     
 })
 
-posNeg.addEventListener("click", () => {
-    posNegFunc();    
-})
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -65,7 +67,7 @@ function numButtonFunc(btn){
 function opButtonFunc(btn){
     if(noOp === false){
         topString += `${workingString + btn.dataset.shows}`;
-        screenTop.innerText = topString;
+        screenUpper.innerText = topString;
         rawMath.push(+workingString);
         rawMath.push(btn.dataset.shows);
         workingString = "";
@@ -83,18 +85,27 @@ function decimalFunc(){
 }
 
 function posNegFunc(){
-    if(workingString.includes("-")){
-        let tempString = workingString.slice(1, workingString.length);
-        workingString = tempString;
-        screenMain.innerText = workingString;       
-    } 
-    else{
-        workingString = "-" + workingString;
-        screenMain.innerText = workingString;
+    if(noNum === false){
+        if(workingString.includes("-")){
+            let tempString = workingString.slice(1, workingString.length);
+            workingString = tempString;
+            screenMain.innerText = workingString;       
+        } 
+        else{
+            workingString = "-" + workingString;
+            screenMain.innerText = workingString;
+        }
     }
 }
 
-
+function allClear(){
+    workingString = "";
+    topString = "";
+    rawMath = [];
+    screenMain.innerText = "0";
+    screenUpper.innerText = "0";
+    answer = null;
+}
 
 
 
