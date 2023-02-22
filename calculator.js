@@ -48,7 +48,7 @@ equals.addEventListener("click", () => {
 })
 
 posNeg.addEventListener("click", () => {
-    
+    posNegFunc();    
 })
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -82,6 +82,17 @@ function decimalFunc(){
     }
 }
 
+function posNegFunc(){
+    if(workingString.includes("-")){
+        let tempString = workingString.slice(1, workingString.length);
+        workingString = tempString;
+        screenMain.innerText = workingString;       
+    } 
+    else{
+        workingString = "-" + workingString;
+        screenMain.innerText = workingString;
+    }
+}
 
 
 
