@@ -9,10 +9,14 @@ const backspace = document.getElementById("backspace");
 const equals = document.getElementById("equals");
 const posNeg = document.getElementById("posNeg");
 
-let workingString = "0"
-screenMain.innerText = workingString;
-let topString = "0";
-screenTop.innerText = topString;
+screenMain.innerText = "0";
+screenTop.innerText = "0";
+
+let workingString = "";
+let topString = "";
+
+let rawMath = [];
+let opLast = true;
 
 numButtons.forEach(btn => {
     btn.addEventListener("click", () => {
@@ -22,7 +26,7 @@ numButtons.forEach(btn => {
 
 opButtons.forEach(btn => {
     btn.addEventListener("click", () => {
-
+        opButtonFunc(btn);
     })
 })
 
@@ -49,16 +53,19 @@ posNeg.addEventListener("click", () => {
 ////////////////////////////////////////////////////////////////////////////////
 
 function numButtonFunc(btn){
-    if(workingString === "0"){
-        workingString = `${btn.dataset.shows}`
-    }
-    else{
-        workingString += `${btn.dataset.shows}`
-    }
+    workingString += `${btn.dataset.shows}`; 
     screenMain.innerText = workingString;
+    opLast = false;
     console.log(workingString);
 }
 
+function opButtonFunc(btn){
+    if(opLast === false){
+        topString += `${workingString + btn.dataset.shows}`;
+        screenTop.innerText = topString;
+        workingString = ""
+    }
+}
 
 
 
