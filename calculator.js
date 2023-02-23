@@ -57,12 +57,17 @@ equals.addEventListener("click", () => {
 
 function numButtonFunc(btn){
     if(noNum === false){
-        workingString += `${btn.dataset.shows}`; 
+        if(workingString === "0"){
+            workingString = `${btn.dataset.shows}`;
+        }
+        else{
+            workingString += `${btn.dataset.shows}`;
+        } 
         screenMain.innerText = workingString;
         noOp = false;
         noEquals = false;
         console.log(workingString);
-    }
+        }
 }
 
 function opButtonFunc(btn){
@@ -146,6 +151,7 @@ function equalsFunc(){
             answer = resolvingMath[0];
             screenMain.innerText = answer;
             workingString = answer.toString();
+            topString = "";
             console.log(workingString);
             console.log(answer);
             rawMath = [];
@@ -173,7 +179,7 @@ function resolve(resolvingMath, opUsedOne, opUsedTwo, funcUsedOne, funcUsedTwo){
 
 function divZeroCheck(){
     if((workingString === "0") && (rawMath[rawMath.length -1] === "/")){
-        screenMain.innerText = "No Dice";
+        screenMain.innerText = "No Div By 0!";
         return false;
     }
     else{
