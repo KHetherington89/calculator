@@ -18,6 +18,7 @@ let topString = "";
 let rawMath = [];
 let noOp = true;
 let noNum = false;
+let noEquals = true;
 let answer = null;
 
 numButtons.forEach(btn => {
@@ -49,9 +50,8 @@ backspace.addEventListener("click", () => {
 })
 
 equals.addEventListener("click", () => {
-    
+    equalsFunc();
 })
-
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -60,20 +60,23 @@ function numButtonFunc(btn){
         workingString += `${btn.dataset.shows}`; 
         screenMain.innerText = workingString;
         noOp = false;
+        noEquals = false;
         console.log(workingString);
     }
 }
 
 function opButtonFunc(btn){
     if(noOp === false){
-        topString += `${workingString + btn.dataset.shows}`;
-        screenUpper.innerText = topString;
-        rawMath.push(+workingString);
-        rawMath.push(btn.dataset.shows);
-        workingString = "";
-        noOp = true;
-        console.log(rawMath);
-        console.log("WorkingString = " + workingString)
+        if(divZeroCheck()){        
+            topString += `${workingString + btn.dataset.shows}`;
+            screenUpper.innerText = topString;
+            rawMath.push(+workingString);
+            rawMath.push(btn.dataset.shows);
+            workingString = "";
+            noOp = true;
+            noEquals = true;
+            console.log(rawMath);
+        }
     }
 }
 
@@ -130,7 +133,78 @@ function backspaceFunc(){
     }
 }
 
+function equalsFunc(){
+    if((noEquals === false) && (rawMath.length !== 0)){
+        if(divZeroCheck()){
+            rawMath.push(+workingString);
+            topString += workingString;
+            screenUpper.innerText = topString;
+            let resolvingMath = rawMath;
+            resolve(resolvingMath, "^", null, power, null);
+            resolve(resolvingMath, "x", "/", multiply, divide);
+            resolve(resolvingMath, "+", "-", add, subtract);
+            answer = resolvingMath[0];
+            screenMain.innerText = answer;
+            workingString = answer.toString();
+            console.log(workingString);
+            console.log(answer);
+            rawMath = [];
+            resolvingMath = [];
+            noEquals= true;
+        }
+    }    
+}
+// resolve function Needs to use this "two opUsed, two function" setup to keep times/divide and plus/minus at the same level of priority
+function resolve(resolvingMath, opUsedOne, opUsedTwo, funcUsedOne, funcUsedTwo){
+    let opIndex = resolvingMath.findIndex(element => (element===opUsedOne)||(element===opUsedTwo));
+        if(opIndex !== -1){
+            let tempNo;
+            if(resolvingMath[opIndex] === opUsedOne){
+                tempNo = funcUsedOne(resolvingMath, opIndex)
+            }
+            else if(resolvingMath[opIndex] === opUsedTwo){
+                tempNo = funcUsedTwo(resolvingMath, opIndex)
+                }
+            resolvingMath.splice(opIndex-1, 3, tempNo);
+            console.log(resolvingMath);
+            resolve(resolvingMath, opUsedOne, opUsedTwo, funcUsedOne, funcUsedTwo)
+        }
+    }
 
+function divZeroCheck(){
+    if((workingString === "0") && (rawMath[rawMath.length -1] === "/")){
+        screenMain.innerText = "No Dice";
+        return false;
+    }
+    else{
+        return true;
+    }
+}
+
+function power(resolvingMath, opIndex){
+    let tempNo = resolvingMath[opIndex-1] ** resolvingMath[opIndex+1];
+    return tempNo;
+}
+
+function multiply(resolvingMath, opIndex){
+    let tempNo = resolvingMath[opIndex-1] * resolvingMath[opIndex+1];
+    return tempNo;
+}
+
+function divide(resolvingMath, opIndex){
+    let tempNo = resolvingMath[opIndex-1] / resolvingMath[opIndex+1];
+    return tempNo;
+}
+
+function add(resolvingMath, opIndex){
+    let tempNo = resolvingMath[opIndex-1] + resolvingMath[opIndex+1];
+    return tempNo;
+}
+
+function subtract (resolvingMath, opIndex){
+    let tempNo = resolvingMath[opIndex-1] - resolvingMath[opIndex+1];
+    return tempNo;
+}
 
 
 
