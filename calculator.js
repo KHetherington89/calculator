@@ -64,13 +64,10 @@ function numButtonFunc(btn){
         else if(workingString.length < screenLimit){            
             workingString += `${btn.dataset.shows}`;
         } 
-        screenMain.innerText = workingString;
+        screenMain.innerText = "";
+        setTimeout(() => screenMain.innerText = workingString, 30);  //Time out just makes the display blink, so that it's obvious a new number has been entered, even if it's the same as what is currently being shown. Shows calculator is "doing something". 
         noOp = false;
         noEquals = false;
-        console.log(workingString);
-        console.log(`noNum = ${noNum}`)
-        console.log(`noOp = ${noOp}`)
-        console.log(`noEquals = ${noEquals}`)
         }
 }
 
@@ -87,10 +84,6 @@ function opButtonFunc(btn){
                 noOp = true;
                 noEquals = true;
                 noNum = false;
-                console.log(rawMath);
-                console.log(`noNum = ${noNum}`)
-                console.log(`noOp = ${noOp}`)
-                console.log(`noEquals = ${noEquals}`)
             }
         }
     }
@@ -128,9 +121,6 @@ function allClearFunc(){
     noEquals = true;
     noOp = true;
     noNum = false;
-    console.log(`noNum = ${noNum}`)
-    console.log(`noOp = ${noOp}`)
-    console.log(`noEquals = ${noEquals}`)
 }
 
 function backspaceFunc(){
@@ -155,14 +145,8 @@ function backspaceFunc(){
             else{
                 screenUpper.innerText = topString;
             }
-            console.log(topString)
-            console.log(rawMath);
-
         };
     }
-    console.log(`noNum = ${noNum}`)
-    console.log(`noOp = ${noOp}`)
-    console.log(`noEquals = ${noEquals}`)
 }
 
 function equalsFunc(){
@@ -180,16 +164,10 @@ function equalsFunc(){
             screenMain.innerText = answer.toString().slice(0, screenLimit);
             workingString = answer.toString();
             topString = "";
-            console.log(workingString);
-            console.log(answer);
             rawMath = [];
             resolvingMath = [];
             noEquals= true;
             noNum = true;
-            console.log(`noNum = ${noNum}`)
-            console.log(`noOp = ${noOp}`)
-            console.log(`noEquals = ${noEquals}`)
-            console.log(rawMath);
         }
     }    
 }
@@ -205,7 +183,6 @@ function resolve(resolvingMath, opUsedOne, opUsedTwo, funcUsedOne, funcUsedTwo){
                 tempNo = funcUsedTwo(resolvingMath, opIndex)
                 }
             resolvingMath.splice(opIndex-1, 3, tempNo);
-            console.log(resolvingMath);
             resolve(resolvingMath, opUsedOne, opUsedTwo, funcUsedOne, funcUsedTwo)
         }
     }
