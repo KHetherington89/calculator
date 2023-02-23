@@ -68,6 +68,9 @@ function numButtonFunc(btn){
         noOp = false;
         noEquals = false;
         console.log(workingString);
+        console.log(`noNum = ${noNum}`)
+        console.log(`noOp = ${noOp}`)
+        console.log(`noEquals = ${noEquals}`)
         }
 }
 
@@ -82,7 +85,11 @@ function opButtonFunc(btn){
                 workingString = "";
                 noOp = true;
                 noEquals = true;
+                noNum = false;
                 console.log(rawMath);
+                console.log(`noNum = ${noNum}`)
+                console.log(`noOp = ${noOp}`)
+                console.log(`noEquals = ${noEquals}`)
             }
         }
     }
@@ -117,12 +124,24 @@ function allClearFunc(){
     screenMain.innerText = "0";
     screenUpper.innerText = "0";
     answer = null;
+    noEquals = true;
+    noOp = true;
+    noNum = false;
+    console.log(`noNum = ${noNum}`)
+    console.log(`noOp = ${noOp}`)
+    console.log(`noEquals = ${noEquals}`)
 }
 
 function backspaceFunc(){
     if(workingString !== ""){
         workingString = "";
         screenMain.innerText = "0";
+        if(topString === ""){
+            screenUpper.innerText = "0";
+        }
+        noOp = true;
+        noEquals = true;
+        noNum = false;
     }
     else{
         if(rawMath.length > 0){
@@ -137,8 +156,12 @@ function backspaceFunc(){
             }
             console.log(topString)
             console.log(rawMath);
+
         };
     }
+    console.log(`noNum = ${noNum}`)
+    console.log(`noOp = ${noOp}`)
+    console.log(`noEquals = ${noEquals}`)
 }
 
 function equalsFunc(){
@@ -160,6 +183,11 @@ function equalsFunc(){
             rawMath = [];
             resolvingMath = [];
             noEquals= true;
+            noNum = true;
+            console.log(`noNum = ${noNum}`)
+            console.log(`noOp = ${noOp}`)
+            console.log(`noEquals = ${noEquals}`)
+            console.log(rawMath);
         }
     }    
 }
