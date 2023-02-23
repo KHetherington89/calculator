@@ -18,8 +18,11 @@ let topString = "";
 
 let rawMath = [];
 let noOp = true;
+opGlowRemove();
 let noNum = false;
+numGlowAdd();
 let noEquals = true;
+equalsGlowRemove();
 let answer = null;
 
 numButtons.forEach(btn => {
@@ -67,7 +70,9 @@ function numButtonFunc(btn){
         screenMain.innerText = "";
         setTimeout(() => screenMain.innerText = workingString, 30);  //Time out just makes the display blink, so that it's obvious a new number has been entered, even if it's the same as what is currently being shown. Shows calculator is "doing something". 
         noOp = false;
+        opGlowAdd();
         noEquals = false;
+        equalsGlowAdd();
         }
 }
 
@@ -82,8 +87,11 @@ function opButtonFunc(btn){
                 rawMath.push(btn.dataset.shows);
                 workingString = "";
                 noOp = true;
+                opGlowRemove();
                 noEquals = true;
+                equalsGlowRemove();
                 noNum = false;
+                numGlowAdd();
             }
         }
     }
@@ -120,7 +128,9 @@ function allClearFunc(){
     answer = null;
     noEquals = true;
     noOp = true;
+    opGlowRemove();
     noNum = false;
+    numGlowAdd();
 }
 
 function backspaceFunc(){
@@ -131,8 +141,11 @@ function backspaceFunc(){
             screenUpper.innerText = "0";
         }
         noOp = true;
+        opGlowRemove();
         noEquals = true;
+        equalsGlowRemove();
         noNum = false;
+        numGlowAdd();
     }
     else{
         if(rawMath.length > 0){
@@ -167,7 +180,9 @@ function equalsFunc(){
             rawMath = [];
             resolvingMath = [];
             noEquals= true;
+            equalsGlowRemove();
             noNum = true;
+            numGlowRemove();
         }
     }    
 }
@@ -236,6 +251,64 @@ function add(resolvingMath, opIndex){
 function subtract (resolvingMath, opIndex){
     let tempNo = resolvingMath[opIndex-1] - resolvingMath[opIndex+1];
     return tempNo;
+}
+
+function numGlowRemove(){
+    numButtons.forEach(btn => {
+        if(btn.classList.contains("hoverGlow")){
+            btn.classList.remove("hoverGlow")
+        }
+    })
+    if(posNeg.classList.contains("hoverGlow")){
+        posNeg.classList.remove("hoverGlow");
+    }
+    if(decimal.classList.contains("hoverGlow")){
+        decimal.classList.remove("hoverGlow");
+    }
+}
+
+function numGlowAdd(){
+    numButtons.forEach(btn => {
+        if(!btn.classList.contains("hoverGlow")){
+            btn.classList.add("hoverGlow")
+        }
+    })
+    if(!posNeg.classList.contains("hoverGlow")){
+        posNeg.classList.add("hoverGlow");
+    }
+    if(!decimal.classList.contains("hoverGlow")){
+        decimal.classList.add("hoverGlow");
+    }
+}
+
+
+
+function opGlowRemove(){
+    opButtons.forEach(btn => {
+        if(btn.classList.contains("hoverGlow")){
+            btn.classList.remove("hoverGlow");
+        }
+    })
+}
+
+function opGlowAdd(){
+    opButtons.forEach(btn => {
+        if(!btn.classList.contains("hoverGlow")){
+            btn.classList.add("hoverGlow")
+        }
+    })
+}
+
+function equalsGlowRemove(){
+    if(equals.classList.contains("hoverGlow")){
+        equals.classList.remove("hoverGlow");
+    }
+}
+
+function equalsGlowAdd(){
+    if(!equals.classList.contains("hoverGlow")){
+        equals.classList.add("hoverGlow");
+    }
 }
 
 footer.innerHTML = `<a style="color:black; text-decoration:none" href="https://github.com/KHetherington89/calculator">Copyright © ${new Date().getFullYear()} KHetherington89 
