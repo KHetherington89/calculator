@@ -1,0 +1,22 @@
+CALCULATOR!
+
+This calculator was built as the last project of The Odin Project fundamentals 
+course, using all of the HTML, CSS, and JavaScript skills learned so far.
+
+I have, frankly, gone way off script on this project.
+This calculator respects the correct order of operation, and is currently
+capable of addition, subtraction, multiplication, division, and exponentiation,
+and also supports decimals and negative numbers.
+
+The numbers and operators are collected into an array, which is then processed
+by a number of functions when equals is pressed. These functions first apply 
+the order of operations, then read left to right.
+The array is currently limited to 41 items, 21 numbers and 20 operators,
+thpugh this limit is entirely arbitrary. Numerical inputs are limited to 12 
+characters including decimal points and minus signs. Main screen output is 
+also limited to 12 characters to prevent overflowing. Both of these limits are
+controlled by the same variable. 
+
+There are a number of tests and conditions on each of the inputs to  try to
+prevent unpredictable or undesirable behaviours, such as checking that no
+attempt is being made to divide by 0.
