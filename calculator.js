@@ -11,6 +11,7 @@ const equals = document.getElementById("equals");
 
 screenMain.innerText = "0";
 screenUpper.innerText = "0";
+let screenLimit = 12;
 
 let workingString = "";
 let topString = "";
@@ -60,7 +61,7 @@ function numButtonFunc(btn){
         if(workingString === "0"){
             workingString = `${btn.dataset.shows}`;
         }
-        else{
+        else if(workingString.length < screenLimit){            
             workingString += `${btn.dataset.shows}`;
         } 
         screenMain.innerText = workingString;
@@ -72,15 +73,17 @@ function numButtonFunc(btn){
 
 function opButtonFunc(btn){
     if(noOp === false){
-        if(divZeroCheck()){        
-            topString += `${workingString + btn.dataset.shows}`;
-            screenUpper.innerText = topString;
-            rawMath.push(+workingString);
-            rawMath.push(btn.dataset.shows);
-            workingString = "";
-            noOp = true;
-            noEquals = true;
-            console.log(rawMath);
+        if(maxLengthCheck()){
+            if(divZeroCheck()){ //Nested because running them together could cause 2 error messages to try to appear at once.       
+                topString += `${workingString + btn.dataset.shows}`;
+                screenUpper.innerText = topString;
+                rawMath.push(+workingString);
+                rawMath.push(btn.dataset.shows);
+                workingString = "";
+                noOp = true;
+                noEquals = true;
+                console.log(rawMath);
+            }
         }
     }
 }
@@ -149,7 +152,7 @@ function equalsFunc(){
             resolve(resolvingMath, "x", "/", multiply, divide);
             resolve(resolvingMath, "+", "-", add, subtract);
             answer = resolvingMath[0];
-            screenMain.innerText = answer;
+            screenMain.innerText = answer.toString().slice(0, screenLimit);
             workingString = answer.toString();
             topString = "";
             console.log(workingString);
@@ -180,6 +183,16 @@ function resolve(resolvingMath, opUsedOne, opUsedTwo, funcUsedOne, funcUsedTwo){
 function divZeroCheck(){
     if((workingString === "0") && (rawMath[rawMath.length -1] === "/")){
         screenMain.innerText = "No Div By 0!";
+        return false;
+    }
+    else{
+        return true;
+    }
+}
+
+function maxLengthCheck(){
+    if(rawMath.length >= 40){
+        screenMain.innerText = "I'm full. Num & = ";
         return false;
     }
     else{
