@@ -77,7 +77,8 @@ function numButtonFunc(btn){
 function opButtonFunc(btn){
     if(noOp === false){
         if(maxLengthCheck()){
-            if(divZeroCheck()){ //Nested because running them together could cause 2 error messages to try to appear at once.       
+            if(divZeroCheck()){ //Nested because running them together could cause 2 error messages to try to appear at once. 
+                trailingDecCheck();
                 topString += `${workingString + btn.dataset.shows}`;
                 screenUpper.innerText = topString;
                 rawMath.push(+workingString);
@@ -167,6 +168,7 @@ function backspaceFunc(){
 function equalsFunc(){
     if((noEquals === false) && (rawMath.length !== 0)){
         if(divZeroCheck()){
+            trailingDecCheck()
             rawMath.push(+workingString);
             topString += workingString;
             screenUpper.innerText = topString;
@@ -228,6 +230,12 @@ function maxLengthCheck(){
     }
 }
 
+function trailingDecCheck(){
+    if(workingString.slice(-1) === "."){
+        workingString = workingString.slice(0, -1)
+    } 
+}
+
 function power(resolvingMath, opIndex){
     let tempNo = resolvingMath[opIndex-1] ** resolvingMath[opIndex+1];
     return tempNo;
@@ -252,39 +260,6 @@ function subtract (resolvingMath, opIndex){
     let tempNo = resolvingMath[opIndex-1] - resolvingMath[opIndex+1];
     return tempNo;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 footer.innerHTML = `<a style="color:black; text-decoration:none" href="https://github.com/KHetherington89/calculator">Copyright © ${new Date().getFullYear()} KHetherington89 
 <i class="fa fa-github" style="font-size:24p; color:black"></i></a>`;
